@@ -186,14 +186,12 @@ mark{background:var(--hl);color:inherit;padding:0 1px}
 .lead .side{padding-left:24px}
 .lead .issue-tag{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .lead .issue-tag b{font-family:var(--disp);background:var(--ink);color:var(--bg);padding:2px 8px;font-weight:700;letter-spacing:.04em}
-.leadrow{display:flex;gap:28px;align-items:flex-start}
-.leadtxt{flex:1 1 auto;min-width:0}
-.fig{flex:0 0 340px;width:340px;margin:6px 0 0;text-align:center}
-.fig img{display:block;width:100%;max-height:320px;object-fit:contain;margin:0 auto}
+.fig{display:block;max-width:560px;margin:18px 0 4px;text-align:left}
+.fig img{display:block;width:100%;max-height:340px;object-fit:contain;object-position:left center}
 .fig span{display:block;font-size:11px;color:var(--faint);margin-top:6px}
 .lead .main::after{content:"";display:block;clear:both}
 .thumb{float:right;width:64px;height:64px;object-fit:contain;margin:2px 0 6px 12px}
-@media (max-width:760px){.leadrow{flex-direction:column-reverse;gap:14px}.fig{flex:none;width:100%;max-width:420px;margin:0 auto}}
+@media (max-width:760px){.fig{max-width:100%}}
 .slist li::after,.lead .sub>div::after{content:"";display:block;clear:both}
 .lead .main .hd{font-size:clamp(24px,3.2vw,36px);line-height:1.25;margin:8px 0 0;word-break:keep-all}
 .lead .main .dek{font-size:17px;line-height:1.7;margin-top:14px}
@@ -403,14 +401,11 @@ function home(){
   var h='';
   h+='<section class="lead"><div class="main">';
   h+='<div class="issue-tag"><b>최신호</b><a href="'+ilink(last)+'">'+fmtD(last)+' 호</a><span>· 경쟁사 '+cc.c+'건 · 규제 '+cc.g+'건</span></div>';
-  h+='<div class="leadrow"><div class="leadtxt">';
   h+=kicker(lead)+'<h2 class="hd">'+alink(lead,esc(lead.title))+'</h2>';
   if(lead.title_en) h+='<div class="en">'+esc(lead.title_en)+'</div>';
+  if(lead.img) h+='<a class="fig" href="'+pdfUrl(lead.date)+'" target="_blank" rel="noopener"><img src="'+lead.img+'" alt="'+esc(lead.title)+'">'+(lead.credit?'<span>사진: '+esc(lead.credit)+'</span>':'')+'</a>';
   if(lead.summary) h+='<p class="dek">'+esc(lead.summary)+'</p>';
   h+='<div class="meta"><span>'+esc((lead.source||[]).join(' · '))+'</span><a href="'+pdfUrl(last)+'" target="_blank" rel="noopener" class="iss">발행본 PDF ↗</a></div>';
-  h+='</div>';
-  if(lead.img) h+='<a class="fig" href="'+pdfUrl(lead.date)+'" target="_blank" rel="noopener"><img src="'+lead.img+'" alt="'+esc(lead.title)+'">'+(lead.credit?'<span>사진: '+esc(lead.credit)+'</span>':'')+'</a>';
-  h+='</div>';
   h+='<div class="sub">'+subs.map(function(r){return '<div>'+thumb(r)+kicker(r)+'<h3 class="hd">'+alink(r,esc(r.title))+'</h3>'+(r.summary?'<p class="dek">'+esc(r.summary)+'</p>':'')+'</div>'}).join('')+'</div>';
   h+='</div><aside class="side"><h3>'+esc(sideTitle)+'</h3><ul class="slist">';
   h+=sideItems.map(function(r){return '<li>'+thumb(r)+kicker(r)+'<div class="hd">'+alink(r,esc(r.title))+'</div></li>'}).join('');
