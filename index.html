@@ -531,7 +531,7 @@ function route(){
 addEventListener('hashchange',route); route();
 
 // ---------- 방문 집계 (GoatCounter) ----------
-var GC_CODE = "ngp-archive";
+var GC_CODE = "";
 if(GC_CODE && GC_CODE.indexOf('__')<0){
   var GC='https://'+GC_CODE+'.goatcounter.com';
   var sc=document.createElement('script'); sc.async=true; sc.src='gc.js'; // GoatCounter count.js 자체 호스팅 — 회사망에서 gc.zgo.at이 막혀 있음(2026.11.05)
